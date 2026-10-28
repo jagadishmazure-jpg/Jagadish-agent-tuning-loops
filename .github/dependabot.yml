@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # Runtime code is standard-library only (no requirements file), so only
+  # GitHub Actions versions are tracked here.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: weekly}
