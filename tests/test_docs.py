@@ -52,9 +52,15 @@ def test_count_tests_script_matches_pytest_collection():
     assert f"{script_total} tests collected" in collected.stdout
 
 
-def test_no_workflow_files_in_scaffold():
-    assert not list((ROOT / ".github").rglob("*")) \
-        if (ROOT / ".github").exists() else True
+def test_workflow_actions_are_sha_pinned():
+    # Replaces the scaffold-era "no .github" check now that CI exists:
+    # every third-party action must be pinned to a full commit SHA.
+    import re
+    workflows = list((ROOT / ".github" / "workflows").glob("*.yml"))
+    assert workflows
+    for wf in workflows:
+        for ref in re.findall(r"uses:\s*(\S+)", wf.read_text(encoding="utf-8")):
+            assert re.search(r"@[0-9a-f]{40}$", ref), f"{wf.name}: {ref}"
 
 
 def test_no_venv_inside_scaffold():
