@@ -1,7 +1,6 @@
 # Design notes
 
-Distilled from the production pattern this repo implements, in
-our own words.
+The production pattern this repo implements.
 
 ## The loop, in one paragraph
 
